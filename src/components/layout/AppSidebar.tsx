@@ -1,51 +1,50 @@
 import { Home, Briefcase, Search, FileText, LogOut, User, Building2 } from 'lucide-react';
 import { NavLink as RouterNavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/components/ui/sidebar';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-
-const agentNavItems = [
-  { title: 'Dashboard', url: '/dashboard', icon: Home },
-  { title: 'My Jobs', url: '/jobs', icon: Briefcase },
-  { title: 'Invoices', url: '/invoices', icon: FileText },
-];
-
-const contractorNavItems = [
-  { title: 'Job Board', url: '/marketplace', icon: Search },
-  { title: 'My Bids', url: '/my-bids', icon: Briefcase },
-  { title: 'Invoices', url: '/invoices', icon: FileText },
-];
-
+const agentNavItems = [{
+  title: 'Dashboard',
+  url: '/dashboard',
+  icon: Home
+}, {
+  title: 'My Jobs',
+  url: '/jobs',
+  icon: Briefcase
+}, {
+  title: 'Invoices',
+  url: '/invoices',
+  icon: FileText
+}];
+const contractorNavItems = [{
+  title: 'Job Board',
+  url: '/marketplace',
+  icon: Search
+}, {
+  title: 'My Bids',
+  url: '/my-bids',
+  icon: Briefcase
+}, {
+  title: 'Invoices',
+  url: '/invoices',
+  icon: FileText
+}];
 export function AppSidebar() {
-  const { user, logout } = useAuth();
+  const {
+    user,
+    logout
+  } = useAuth();
   const location = useLocation();
-
   if (!user) return null;
-
   const navItems = user.role === 'agent' ? agentNavItems : contractorNavItems;
-
-  return (
-    <Sidebar className="border-r border-sidebar-border">
+  return <Sidebar className="border-r border-sidebar-border">
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-display font-bold text-lg">
-            R
-          </div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground font-display font-bold text-lg">H</div>
           <div>
-            <h1 className="font-display text-xl font-bold text-sidebar-foreground">Rentr</h1>
+            <h1 className="font-display text-xl font-bold text-sidebar-foreground">Handshake</h1>
             <p className="text-xs text-muted-foreground capitalize">{user.role} Portal</p>
           </div>
         </div>
@@ -60,26 +59,17 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.url;
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      className={`mx-2 rounded-lg transition-all duration-200 ${
-                        isActive
-                          ? 'bg-primary text-primary-foreground shadow-sm'
-                          : 'hover:bg-sidebar-accent text-sidebar-foreground'
-                      }`}
-                    >
+              {navItems.map(item => {
+              const isActive = location.pathname === item.url;
+              return <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild className={`mx-2 rounded-lg transition-all duration-200 ${isActive ? 'bg-primary text-primary-foreground shadow-sm' : 'hover:bg-sidebar-accent text-sidebar-foreground'}`}>
                       <RouterNavLink to={item.url} className="flex items-center gap-3 px-4 py-2.5">
                         <item.icon className="h-5 w-5" />
                         <span className="font-medium">{item.title}</span>
                       </RouterNavLink>
                     </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
+                  </SidebarMenuItem>;
+            })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -98,17 +88,11 @@ export function AppSidebar() {
               <p className="text-xs text-muted-foreground truncate">{user.companyName}</p>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="w-full justify-start text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-            onClick={logout}
-          >
+          <Button variant="ghost" size="sm" className="w-full justify-start text-muted-foreground hover:text-destructive hover:bg-destructive/10" onClick={logout}>
             <LogOut className="h-4 w-4 mr-2" />
             Sign Out
           </Button>
         </div>
       </SidebarFooter>
-    </Sidebar>
-  );
+    </Sidebar>;
 }

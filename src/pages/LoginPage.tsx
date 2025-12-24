@@ -24,9 +24,7 @@ export default function LoginPage() {
         <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-foreground/20 backdrop-blur-sm font-display font-bold text-2xl">
-                R
-              </div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-foreground/20 backdrop-blur-sm font-display font-bold text-2xl">H</div>
               <h1 className="font-display text-3xl font-bold">Handshake</h1>
             </div>
             <p className="text-primary-foreground/80 text-lg">Property Maintenance Marketplace</p>
@@ -40,9 +38,7 @@ export default function LoginPage() {
             </div>
           </div>
           
-          <p className="text-sm text-primary-foreground/60">
-            © 2024 Rentr. All rights reserved.
-          </p>
+          <p className="text-sm text-primary-foreground/60">© 2024 Handshake. All rights reserved.</p>
         </div>
       </div>
 
@@ -60,7 +56,7 @@ export default function LoginPage() {
           </div>
 
           <div className="text-center">
-            <h2 className="font-display text-2xl font-bold text-foreground">Welcome to Rentr</h2>
+            <h2 className="font-display text-2xl font-bold text-foreground">Welcome to Handshake</h2>
             <p className="text-muted-foreground mt-2">Select your role to continue</p>
           </div>
 

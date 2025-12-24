@@ -50,7 +50,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
 
-      <Separator className="mx-4" />
+      <Separator className="mx-3" />
 
       <SidebarContent className="px-2 py-4">
         <SidebarGroup>

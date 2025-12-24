@@ -38,7 +38,7 @@ export default function LoginPage() {
             </div>
           </div>
           
-          <p className="text-sm text-primary-foreground/60">© 2024 Handshake. All rights reserved.</p>
+          <p className="text-sm text-primary-foreground/60">© 2025 Handshake. All rights reserved.</p>
         </div>
       </div>
 

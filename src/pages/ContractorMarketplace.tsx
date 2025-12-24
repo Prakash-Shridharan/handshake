@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { Search, SlidersHorizontal, Briefcase, LayoutGrid, Map } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Search, SlidersHorizontal, Briefcase } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { JobCard } from '@/components/jobs/JobCard';
-import { JobsMap } from '@/components/jobs/JobsMap';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,14 +13,10 @@ import {
 } from '@/components/ui/select';
 import { useJobs, JobUrgency } from '@/contexts/JobsContext';
 
-type ViewMode = 'grid' | 'map';
-
 export default function ContractorMarketplace() {
   const { jobs } = useJobs();
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [urgencyFilter, setUrgencyFilter] = useState<JobUrgency | 'all'>('all');
-  const [viewMode, setViewMode] = useState<ViewMode>('grid');
 
   const openJobs = jobs.filter(job => job.status === 'open');
 
@@ -35,10 +29,6 @@ export default function ContractorMarketplace() {
 
     return matchesSearch && matchesUrgency;
   });
-
-  const handleJobSelect = (jobId: string) => {
-    navigate(`/jobs/${jobId}`);
-  };
 
   return (
     <AppLayout>
@@ -79,26 +69,6 @@ export default function ContractorMarketplace() {
               <SelectItem value="emergency">Emergency</SelectItem>
             </SelectContent>
           </Select>
-          
-          {/* View Toggle */}
-          <div className="flex rounded-lg border border-border overflow-hidden">
-            <Button
-              variant={viewMode === 'grid' ? 'default' : 'ghost'}
-              size="sm"
-              className="rounded-none px-3"
-              onClick={() => setViewMode('grid')}
-            >
-              <LayoutGrid className="h-4 w-4" />
-            </Button>
-            <Button
-              variant={viewMode === 'map' ? 'default' : 'ghost'}
-              size="sm"
-              className="rounded-none px-3 border-l border-border"
-              onClick={() => setViewMode('map')}
-            >
-              <Map className="h-4 w-4" />
-            </Button>
-          </div>
         </div>
 
         {/* Results Count */}
@@ -107,10 +77,8 @@ export default function ContractorMarketplace() {
           <span>{filteredJobs.length} jobs available</span>
         </div>
 
-        {/* Content */}
-        {viewMode === 'map' ? (
-          <JobsMap jobs={filteredJobs} onJobSelect={handleJobSelect} />
-        ) : filteredJobs.length > 0 ? (
+        {/* Jobs Grid */}
+        {filteredJobs.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredJobs.map((job, index) => (
               <JobCard key={job.id} job={job} index={index} />

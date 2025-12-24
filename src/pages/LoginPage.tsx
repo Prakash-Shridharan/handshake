@@ -3,18 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAuth, UserRole } from '@/contexts/AuthContext';
-
 export default function LoginPage() {
-  const { login } = useAuth();
+  const {
+    login
+  } = useAuth();
   const navigate = useNavigate();
-
   const handleLogin = (role: UserRole) => {
     login(role);
     navigate(role === 'agent' ? '/dashboard' : '/marketplace');
   };
-
-  return (
-    <div className="min-h-screen bg-background flex">
+  return <div className="min-h-screen bg-background flex">
       {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80" />
@@ -29,28 +27,16 @@ export default function LoginPage() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-foreground/20 backdrop-blur-sm font-display font-bold text-2xl">
                 R
               </div>
-              <h1 className="font-display text-3xl font-bold">Rentr</h1>
+              <h1 className="font-display text-3xl font-bold">Handshake</h1>
             </div>
             <p className="text-primary-foreground/80 text-lg">Property Maintenance Marketplace</p>
           </div>
           
           <div className="space-y-8">
             <div className="space-y-6">
-              <Feature 
-                icon={<Zap className="h-5 w-5" />}
-                title="Fast Job Matching"
-                description="Connect with qualified contractors in minutes"
-              />
-              <Feature 
-                icon={<Shield className="h-5 w-5" />}
-                title="Verified Professionals"
-                description="All contractors are vetted and insured"
-              />
-              <Feature 
-                icon={<Users className="h-5 w-5" />}
-                title="Transparent Pricing"
-                description="Compare quotes and choose the best fit"
-              />
+              <Feature icon={<Zap className="h-5 w-5" />} title="Fast Job Matching" description="Connect with qualified contractors in minutes" />
+              <Feature icon={<Shield className="h-5 w-5" />} title="Verified Professionals" description="All contractors are vetted and insured" />
+              <Feature icon={<Users className="h-5 w-5" />} title="Transparent Pricing" description="Compare quotes and choose the best fit" />
             </div>
           </div>
           
@@ -79,20 +65,8 @@ export default function LoginPage() {
           </div>
 
           <div className="grid gap-4">
-            <RoleCard
-              role="agent"
-              icon={<Building2 className="h-8 w-8" />}
-              title="Property Agent"
-              description="Post maintenance jobs and manage work orders"
-              onClick={() => handleLogin('agent')}
-            />
-            <RoleCard
-              role="contractor"
-              icon={<HardHat className="h-8 w-8" />}
-              title="Contractor"
-              description="Browse jobs and submit competitive bids"
-              onClick={() => handleLogin('contractor')}
-            />
+            <RoleCard role="agent" icon={<Building2 className="h-8 w-8" />} title="Property Agent" description="Post maintenance jobs and manage work orders" onClick={() => handleLogin('agent')} />
+            <RoleCard role="contractor" icon={<HardHat className="h-8 w-8" />} title="Contractor" description="Browse jobs and submit competitive bids" onClick={() => handleLogin('contractor')} />
           </div>
 
           <p className="text-center text-sm text-muted-foreground">
@@ -100,13 +74,18 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
-
-function Feature({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
-  return (
-    <div className="flex gap-4">
+function Feature({
+  icon,
+  title,
+  description
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) {
+  return <div className="flex gap-4">
       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-foreground/20 flex-shrink-0">
         {icon}
       </div>
@@ -114,28 +93,22 @@ function Feature({ icon, title, description }: { icon: React.ReactNode; title: s
         <h3 className="font-semibold">{title}</h3>
         <p className="text-sm text-primary-foreground/70">{description}</p>
       </div>
-    </div>
-  );
+    </div>;
 }
-
-function RoleCard({ 
-  role, 
-  icon, 
-  title, 
-  description, 
-  onClick 
-}: { 
-  role: UserRole; 
-  icon: React.ReactNode; 
-  title: string; 
-  description: string; 
+function RoleCard({
+  role,
+  icon,
+  title,
+  description,
+  onClick
+}: {
+  role: UserRole;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
   onClick: () => void;
 }) {
-  return (
-    <Card 
-      className="group cursor-pointer hover-lift border-2 border-transparent hover:border-primary/20 transition-all duration-300"
-      onClick={onClick}
-    >
+  return <Card className="group cursor-pointer hover-lift border-2 border-transparent hover:border-primary/20 transition-all duration-300" onClick={onClick}>
       <CardContent className="flex items-center gap-4 p-6">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
           {icon}
@@ -146,6 +119,5 @@ function RoleCard({
         </div>
         <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
       </CardContent>
-    </Card>
-  );
+    </Card>;
 }
